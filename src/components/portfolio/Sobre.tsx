@@ -89,8 +89,7 @@ export default function Sobre() {
         >
           <p style={{ fontWeight: 400, fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
             Tenho 19 anos, sou estudante de Sistemas de Informação na FAFRAM e
-            trabalho como Jovem Aprendiz na Vittia Fertilizantes, na área de
-            Engenharia e Projetos.
+            trabalho como Auxiliar Administrativo na Vittia Fertilizantes.
           </p>
           <p style={{ fontWeight: 400, fontSize: "1rem", color: "var(--text-secondary)", lineHeight: 1.8 }}>
             Sou co-fundador da{" "}
