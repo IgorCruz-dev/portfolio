@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://igorcruz.dev"),
+  metadataBase: new URL("https://www.igorcruz.com.br"),
   title: "Igor Cruz — Software Engineer",
   description:
     "Construo produtos digitais que resolvem problemas reais. Co-fundador da StudyTrack. Baseado em São Joaquim da Barra, SP.",
