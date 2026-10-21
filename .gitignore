@@ -45,3 +45,9 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Vídeo original (11 MB). Fica só na máquina: o que o site serve é a versão
+# comprimida em public/media/, e carregar o bruto no histórico do git
+# engordaria o repositório para sempre sem nenhuma página usá-lo.
+# Ver media-fontes/LEIAME.md para regerar.
+media-fontes/*.mp4

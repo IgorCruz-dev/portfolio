@@ -1,0 +1,18 @@
+.rodape { border-top: 1px solid var(--rule-ink); }
+.linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem 1.6rem;
+  padding-block: 2rem;
+}
+.credito, .nota {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--on-ink-muted);
+}
+@media (max-width: 600px) {
+  .linha { flex-direction: column; align-items: flex-start; }
+}

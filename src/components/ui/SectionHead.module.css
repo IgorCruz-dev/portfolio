@@ -1,0 +1,25 @@
+.head { margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+
+.topo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: clamp(1.4rem, 2.6vw, 2.2rem);
+}
+.linha { flex: 1; height: 1px; background: currentColor; opacity: 0.16; }
+
+.corpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: clamp(1.2rem, 4vw, 4rem);
+  align-items: end;
+}
+.titulo { max-width: 18ch; }
+.lead { padding-bottom: 0.4rem; }
+
+.acao { margin-top: 1.8rem; }
+
+@media (max-width: 860px) {
+  .corpo { grid-template-columns: 1fr; gap: 1.2rem; align-items: start; }
+  .titulo { max-width: none; }
+}

@@ -1,0 +1,160 @@
+.secao { position: relative; }
+
+/* ---------- cabeçalho das faixas ---------- */
+.faixasTopo {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 2rem);
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--rule-paper);
+  margin-bottom: 0.4rem;
+}
+.faixasTopo [data-faixa] {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.faixasTopo [data-faixa]::before {
+  content: "";
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.faixasTopo [data-faixa="produto"] { color: var(--signal-deep); }
+
+/* ---------- a grade de três faixas ---------- */
+.linha {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2.4vw, 2rem) clamp(1rem, 2.4vw, 2rem);
+  padding-top: 1.2rem;
+}
+
+/* trilhos verticais das três faixas */
+.linha::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 0;
+  pointer-events: none;
+  background-image: linear-gradient(var(--rule-paper), var(--rule-paper));
+  background-size: 1px 100%;
+  background-repeat: no-repeat;
+  background-position: calc(100% / 6) 0;
+}
+.linha::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(var(--rule-paper), var(--rule-paper)),
+    linear-gradient(var(--rule-paper), var(--rule-paper));
+  background-size: 1px 100%, 1px 100%;
+  background-repeat: no-repeat, no-repeat;
+  background-position: 50% 0, calc(100% - 100% / 6) 0;
+}
+
+.item { position: relative; }
+.item[data-faixa="formação"] { grid-column: 1; }
+.item[data-faixa="corporativo"] { grid-column: 2; }
+.item[data-faixa="produto"] { grid-column: 3; }
+
+.cartao {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--rule-paper);
+  border-radius: 12px;
+  padding: 1.2rem 1.25rem;
+  transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.item:hover .cartao { border-color: rgba(22, 21, 18, 0.3); }
+
+.item[data-destaque="true"] .cartao {
+  border-color: rgba(57, 66, 79, 0.42);
+  background: linear-gradient(160deg, rgba(57, 66, 79, 0.09), var(--paper) 62%);
+  box-shadow: 0 24px 50px -34px rgba(20, 23, 28, 0.55);
+}
+
+.marcador {
+  position: absolute;
+  top: 1.45rem;
+  left: -1px;
+  width: 3px;
+  height: 22px;
+  border-radius: 0 3px 3px 0;
+  background: var(--on-paper);
+  opacity: 0.3;
+}
+.item[data-faixa="produto"] .marcador { background: var(--signal-deep); opacity: 1; }
+
+.periodo { margin-bottom: 0.5rem; }
+.titulo {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: -0.012em;
+  line-height: 1.25;
+}
+.org {
+  font-family: var(--serif);
+  font-size: 1.2rem;
+  line-height: 1.2;
+  margin-top: 0.1rem;
+  margin-bottom: 0.6rem;
+}
+.item[data-faixa="produto"] .org { color: var(--signal-deep); }
+
+.texto { font-size: 0.875rem; line-height: 1.6; color: var(--on-paper-muted); }
+
+/* rótulo da faixa: escondido no desktop (as colunas já dizem), visível no mobile */
+.faixaTag { display: none; }
+
+/* ---------- responsivo: vira lista única ---------- */
+@media (max-width: 900px) {
+  .faixasTopo { display: none; }
+
+  .linha {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    padding-left: 1.3rem;
+  }
+  .linha::before {
+    inset: 0 auto 0 0;
+    width: 1px;
+    background: var(--rule-paper);
+    background-image: none;
+  }
+  .linha::after { display: none; }
+
+  .item[data-faixa] { grid-column: 1; }
+
+  .marcador {
+    left: calc(-1.3rem - 1px);
+    top: 1.5rem;
+    width: 1.3rem;
+    height: 1px;
+    border-radius: 0;
+  }
+
+  .faixaTag {
+    display: inline-block;
+    margin-top: 0.7rem;
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--on-paper-muted);
+    border: 1px solid var(--rule-paper);
+    border-radius: 999px;
+    padding: 0.18rem 0.55rem;
+  }
+  .item[data-faixa="produto"] .faixaTag {
+    color: var(--signal-deep);
+    border-color: rgba(57, 66, 79, 0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartao { transition: none; }
+}

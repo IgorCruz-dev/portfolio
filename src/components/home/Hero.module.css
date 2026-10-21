@@ -1,0 +1,225 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: clamp(7rem, 12vh, 10rem) clamp(3rem, 7vh, 5rem);
+  overflow: hidden;
+}
+
+/* brilho quente atrás do palco — dá profundidade sem pesar */
+.halo {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(58% 54% at 76% 40%, rgba(197, 211, 230, 0.15), transparent 68%),
+    radial-gradient(46% 46% at 20% 16%, rgba(255, 255, 255, 0.055), transparent 70%);
+}
+
+.grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.84fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: center;
+}
+
+/* ---------------- texto ---------------- */
+.copy { position: relative; z-index: 2; }
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(1.2rem, 2.4vw, 2rem);
+}
+.eyebrow > span + span { position: relative; padding-left: 1rem; }
+.eyebrow > span + span::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  width: 5px; height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.titulo { margin-bottom: clamp(1.4rem, 2.6vw, 2rem); }
+.enfase { font-style: italic; }
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.provas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(2.2rem, 4vw, 3.4rem);
+  border-top: 1px solid var(--rule-ink);
+  padding-top: 1.4rem;
+  gap: 1rem;
+}
+.prova { display: flex; flex-direction: column; gap: 0.3rem; padding-right: 1rem; }
+.prova + .prova { padding-left: 1.3rem; border-left: 1px solid var(--rule-ink); }
+
+.provaValor {
+  font-family: var(--serif);
+  font-size: clamp(1.5rem, 2.2vw, 2.1rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.provaRotulo {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--on-ink-muted);
+  text-wrap: balance;
+}
+
+/* ---------------- palco ---------------- */
+.palcoWrap { position: relative; z-index: 1; }
+
+.palco {
+  --px: 0;
+  --py: 0;
+  position: relative;
+  margin-inline: auto;
+  width: min(100%, 420px);
+}
+
+.moldura {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    0 50px 90px -40px rgba(0, 0, 0, 0.95),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  transform: translate3d(calc(var(--px) * -14px), calc(var(--py) * -12px), 0);
+  transition: transform 0.6s var(--ease);
+  background: var(--ink-1);
+}
+
+.video {
+  width: 100%;
+  /* Em telas baixas o quadro retrato roubaria a página inteira; o teto
+     em vh mantém a proporção do enquadramento sem empurrar o texto. */
+  height: min(68vh, 680px);
+  aspect-ratio: 576 / 1024;
+  object-fit: cover;
+  object-position: 50% 30%;
+  display: block;
+}
+
+/* escurece o pé do quadro para a legenda ter contraste garantido */
+.vinheta {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 42%;
+  background: linear-gradient(to top, rgba(8, 8, 9, 0.92) 12%, transparent);
+  pointer-events: none;
+}
+
+.legenda {
+  position: absolute;
+  left: 1.1rem;
+  right: 1.1rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.legendaSub { font-size: 0.8125rem; color: #CFC9BE; }
+
+.cartao {
+  position: absolute;
+  left: -2.2rem;
+  bottom: 16%;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.8rem 1.1rem;
+  transform: translate3d(calc(var(--px) * 26px), calc(var(--py) * 20px), 0);
+  transition: transform 0.6s var(--ease);
+}
+.cartaoTitulo { font-size: 0.875rem; font-weight: 600; letter-spacing: -0.01em; }
+.cartaoSub { font-size: 0.75rem; color: var(--on-ink-muted); }
+
+.ponto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ADE80;
+  box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.18);
+  flex: none;
+}
+
+/* ---------------- rodapé do hero ---------------- */
+.rodape {
+  position: absolute;
+  left: var(--margin);
+  bottom: clamp(1.4rem, 3vh, 2.4rem);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.traco {
+  display: block;
+  width: 52px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(214, 220, 229, 0.9), transparent);
+}
+
+/* ---------------- responsivo ---------------- */
+@media (max-width: 1040px) {
+  .grid { grid-template-columns: 1fr; gap: clamp(2.5rem, 6vw, 3.5rem); }
+  .palcoWrap { order: -1; }
+  .palco { width: min(100%, 320px); }
+  /* Sem sobreposição no mobile: embaixo colidia com a legenda, em cima
+     sumia atrás da barra fixa. Vira um item normal, abaixo do quadro. */
+  .cartao {
+    position: static;
+    transform: none;
+    margin: 0.9rem auto 0;
+    width: fit-content;
+  }
+  .rodape { display: none; }
+}
+
+@media (max-width: 620px) {
+  .provas { grid-template-columns: 1fr; gap: 0; }
+  .prova { padding: 0.85rem 0; }
+  .prova + .prova {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid var(--rule-ink);
+  }
+  .provaValor { font-size: 1.35rem; }
+  .palco { width: min(100%, 260px); }
+  .cartao { padding: 0.65rem 0.9rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moldura, .cartao { transform: none !important; transition: none; }
+}
+
+/* O hero usa uma escala própria: o display global é calibrado para títulos
+   de seção, que têm mais largura disponível do que esta coluna. */
+.titulo {
+  font-size: clamp(2.5rem, 5.4vw, 4.9rem);
+  text-wrap: nowrap;
+}
+@media (max-width: 420px) {
+  .titulo { font-size: clamp(2.1rem, 9.6vw, 2.8rem); }
+}
+
+@media (max-width: 620px) {
+  /* Quebrado em duas linhas, o traço separador aparecia sozinho no começo
+     da segunda — vira uma lista empilhada e o traço some. */
+  .eyebrow { gap: 0.3rem; flex-direction: column; align-items: flex-start; }
+  .eyebrow > span + span { padding-left: 0; }
+  .eyebrow > span + span::before { display: none; }
+}

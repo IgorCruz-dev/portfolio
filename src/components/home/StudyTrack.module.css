@@ -1,0 +1,109 @@
+.secao { position: relative; }
+
+/* ---------- vitrine ---------- */
+.vitrine {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.28fr);
+  gap: clamp(1.2rem, 2.6vw, 2.4rem);
+  align-items: stretch;
+}
+
+.vitrineFig { display: flex; flex-direction: column; min-width: 0; }
+
+.quadro {
+  display: block;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--rule-paper);
+  background: var(--paper-1);
+  box-shadow: 0 40px 80px -46px rgba(22, 21, 18, 0.55);
+}
+.imagem { width: 100%; height: auto; display: block; }
+
+/* A legenda saiu de cima da imagem: sobre um dashboard claro e cheio de
+   informação, texto sobreposto nunca garante contraste. */
+.captura {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 0.9rem;
+  margin-top: 0.85rem;
+}
+.capturaNota { font-size: 0.8125rem; color: var(--on-paper-muted); }
+
+/* números ao lado da imagem, como ficha técnica */
+.numeros {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-left: 1px solid var(--rule-paper);
+  padding-left: clamp(1rem, 2vw, 1.8rem);
+}
+.numero { display: flex; flex-direction: column; gap: 0.15rem; }
+.numero + .numero { padding-top: 0.9rem; border-top: 1px solid var(--rule-paper); }
+
+.numeroValor {
+  font-family: var(--serif);
+  font-size: clamp(1.7rem, 2.6vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--on-paper);
+}
+.numeroRotulo { font-size: 0.8125rem; line-height: 1.35; color: var(--on-paper-muted); }
+
+/* ---------- texto ---------- */
+.texto {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.6rem, 3.4vw, 3.2rem);
+  margin-top: clamp(2.8rem, 6vw, 5rem);
+}
+.bloco { padding-top: 1.2rem; border-top: 2px solid var(--on-paper); }
+.blocoRotulo { margin-bottom: 0.8rem; }
+
+/* ---------- pé ---------- */
+.pe {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+  margin-top: clamp(2.4rem, 5vw, 4rem);
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--rule-paper);
+}
+
+.stack { display: flex; flex-wrap: wrap; gap: 0.4rem; max-width: 640px; }
+.chip {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  padding: 0.32rem 0.7rem;
+  border: 1px solid var(--rule-paper);
+  border-radius: 999px;
+  color: var(--on-paper-muted);
+}
+
+.acoes { display: flex; flex-wrap: wrap; gap: 0.7rem; }
+
+/* ---------- responsivo ---------- */
+@media (max-width: 960px) {
+  .vitrine { grid-template-columns: 1fr; }
+  .numeros {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid var(--rule-paper);
+    padding-top: 1.2rem;
+    gap: 1.2rem 2rem;
+  }
+  .numero { flex: 1 1 130px; }
+  .numero + .numero { padding-top: 0; border-top: 0; }
+  .texto { grid-template-columns: 1fr; gap: 1.8rem; }
+}
+@media (max-width: 560px) {
+  .acoes { width: 100%; }
+  .acoes > * { flex: 1 1 100%; justify-content: center; }
+}

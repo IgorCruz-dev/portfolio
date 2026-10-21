@@ -1,84 +1,64 @@
-# igorcruz.com.br — portfólio
+# igorcruz.com.br
 
-[![CI](https://github.com/IgorCruz-dev/portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/IgorCruz-dev/portfolio/actions/workflows/ci.yml)
-[![Next.js 14](https://img.shields.io/badge/Next.js-14-000000?logo=nextdotjs)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](tsconfig.json)
-[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+Portfólio de Igor Cruz. Next.js 14 (App Router), TypeScript e CSS Modules.
 
-**Meu site pessoal: quem eu sou, o que construí e como falar comigo.**
-Uma página só, rápida, com tema claro/escuro e feita para levar o visitante a
-uma conversa (WhatsApp, e-mail ou LinkedIn).
-
-🔗 **No ar:** [igorcruz.com.br](https://www.igorcruz.com.br)
-
-![Página inicial](docs/screenshot.webp)
-
-## Seções
-
-| Seção | Conteúdo |
-|---|---|
-| Hero | Apresentação, stack em formato de código e CTAs de contato |
-| Sobre | Formação, trabalho e a StudyTrack, com números |
-| Projetos | Cards com status (produto ativo, no ar, hackathon, protótipo), stack e link |
-| Contato | WhatsApp, e-mail, LinkedIn e GitHub |
-
-## Stack
-
-| Camada | Tecnologia |
-|---|---|
-| Framework | Next.js 14 (App Router) |
-| Linguagem | TypeScript |
-| Estilo | Tailwind CSS + variáveis CSS para os temas |
-| Animação | Framer Motion |
-| Ícones | Lucide |
-| Deploy | Vercel |
-
-## Decisões técnicas
-
-- **Tema sem "piscada".** Um script inline no `<head>` aplica o tema salvo
-  antes da hidratação do React, então a página nunca abre no tema errado.
-- **Uma página, sem backend.** Portfólio é conteúdo; não precisa de banco nem
-  de API. Os projetos são uma lista tipada em `Projetos.tsx`.
-- **Fontes otimizadas.** Inter via `next/font`, servida junto com o site, sem
-  requisição ao Google no navegador do visitante.
-
-## Rodando localmente
+## Rodar
 
 ```bash
-git clone https://github.com/IgorCruz-dev/portfolio
-cd portfolio
-cp .env.example .env.local
 npm install
-npm run dev        # http://localhost:3000
+npm run dev     # http://localhost:3000
+npm run build   # build de produção
 ```
 
-| Comando | O que faz |
-|---|---|
-| `npm run dev` | Servidor de desenvolvimento |
-| `npm run build` | Build de produção |
-| `npm run lint` | ESLint |
-| `npm run typecheck` | Checagem de tipos (`tsc --noEmit`) |
-
-## Estrutura
+## Como está organizado
 
 ```
 src/
-  app/                 layout (metadados, Open Graph, tema) e a página
-  components/portfolio/
-    Navbar.tsx         navegação e alternância de tema
-    Hero.tsx           apresentação e CTAs
-    Sobre.tsx          bio e números
-    Projetos.tsx       lista de projetos (edite aqui)
-    ProjectCard.tsx    card de projeto
-    Contato.tsx        canais de contato
-public/assets/         foto e miniaturas dos projetos
+  content/site.ts          fonte única de conteúdo (tipada)
+  app/
+    page.tsx               home
+    trabalho/[slug]/       cases curtos
+    trabalho/studytrack/   case longo
+  components/
+    ui/                    primitivas (Reveal, Lines, SectionHead, Icons)
+    layout/                Nav, Footer
+    home/                  seções da home
+    trabalho/              peças compartilhadas pelos cases
+public/media/              imagens e vídeo servidos
+media-fontes/              originais, fora do que é servido
 ```
 
-## Licença
+### `src/content/site.ts`
 
-Código sob [MIT](LICENSE). Minha foto e as miniaturas dos projetos em
-`public/assets/` não estão cobertas pela licença.
+Todo o texto e todo o número da página saem daqui — nenhum componente tem
+conteúdo escrito dentro. Cada número carrega um campo `fonte` dizendo de onde
+ele veio (repositório, site no ar, perfil público). Se uma afirmação não tem
+origem verificável, ela não entra no arquivo.
 
-## Autor
+Mudar um texto do site é editar este arquivo, não caçar JSX.
 
-**Igor Cruz** · [igorcruz.com.br](https://www.igorcruz.com.br) · [GitHub](https://github.com/IgorCruz-dev)
+## Decisões que não são óbvias
+
+**Não existe alternador de tema.** As seções alternam entre grafite e papel de
+propósito; deixar o visitante inverter isso quebraria o ritmo da página. As
+cores são absolutas, não pares claro/escuro.
+
+**Sem biblioteca de animação.** As revelações são CSS (`.reveal`, `.line-mask`)
+ligadas por um `IntersectionObserver` de ~40 linhas. A paralaxe do hero escreve
+duas custom properties e deixa o CSS transformar — sem re-render do React. O
+resultado é a home em ~108 kB de JS.
+
+**Movimento reduzido é tratado de verdade.** Com `prefers-reduced-motion`, o
+vídeo do hero é substituído pelo pôster (não só "sem transição"), e as
+revelações entregam o conteúdo direto.
+
+**Mídia pesada mora fora de `public/`.** Ver `media-fontes/LEIAME.md` para como
+regerar o que é servido.
+
+## Verificações feitas
+
+- Contraste AA em todas as combinações de cor das páginas
+- Um `<h1>` por página, hierarquia de títulos sem salto, `lang="pt-BR"`
+- Toda imagem com `alt`, todo link com nome acessível, foco visível em tudo
+- Sem rolagem horizontal em 390 / 768 / 1440
+- `sitemap.xml`, `robots.txt`, Open Graph e JSON-LD (`Person`)

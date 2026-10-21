@@ -1,18 +1,24 @@
-import Navbar from "@/components/portfolio/Navbar";
-import Hero from "@/components/portfolio/Hero";
-import Sobre from "@/components/portfolio/Sobre";
-import Projetos from "@/components/portfolio/Projetos";
-import Contato from "@/components/portfolio/Contato";
-import Footer from "@/components/portfolio/Footer";
+import Nav from "@/components/layout/Nav";
+import Footer from "@/components/layout/Footer";
+import Hero from "@/components/home/Hero";
+import StudyTrack from "@/components/home/StudyTrack";
+import Trabalho from "@/components/home/Trabalho";
+import Trajetoria from "@/components/home/Trajetoria";
+import Palco from "@/components/home/Palco";
+import Principios from "@/components/home/Principios";
+import Contato from "@/components/home/Contato";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <main>
+      <Nav />
+      <main id="conteudo">
         <Hero />
-        <Sobre />
-        <Projetos />
+        <StudyTrack />
+        <Trabalho />
+        <Trajetoria />
+        <Palco />
+        <Principios />
         <Contato />
       </main>
       <Footer />

@@ -1,0 +1,76 @@
+.secao { position: relative; }
+
+.topo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: clamp(1.6rem, 4vw, 3.4rem);
+  align-items: center;
+  padding-bottom: clamp(2.4rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--rule-ink);
+}
+
+.marcador { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.4rem; }
+.titulo { max-width: 16ch; margin-bottom: 1.2rem; }
+.lead { max-width: 48ch; }
+
+.retrato {
+  width: clamp(180px, 24vw, 280px);
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--rule-ink);
+  /* o fundo do estúdio já é escuro: a máscara funde a foto no grafite */
+  -webkit-mask-image: radial-gradient(130% 100% at 50% 35%, #000 58%, transparent 100%);
+  mask-image: radial-gradient(130% 100% at 50% 35%, #000 58%, transparent 100%);
+}
+.retratoImg { width: 100%; height: auto; display: block; }
+
+/* ---------- portas ---------- */
+.portas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.2rem, 2.6vw, 2.4rem);
+  margin-top: clamp(2.4rem, 5vw, 4rem);
+}
+.porta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem 1.4rem;
+  border: 1px solid var(--rule-ink);
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.04), transparent 70%);
+  transition: border-color 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.porta:hover { border-color: rgba(214, 220, 229, 0.42); transform: translateY(-3px); }
+
+.portaTitulo {
+  font-family: var(--serif);
+  font-size: 1.45rem;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-top: 0.3rem;
+}
+.portaTexto { font-size: 0.9rem; line-height: 1.6; color: var(--on-ink-muted); }
+.portaCta { margin-top: auto; padding-top: 1rem; font-size: 0.875rem; color: var(--signal); align-self: flex-start; }
+
+/* ---------- canais ---------- */
+.canais {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1.6rem;
+  margin-top: clamp(2.4rem, 5vw, 3.6rem);
+}
+.sociais { display: flex; gap: 1.6rem; margin-left: auto; }
+.social { font-size: 0.875rem; color: var(--on-ink-muted); }
+.social:hover { color: var(--signal); }
+
+@media (max-width: 900px) {
+  .topo { grid-template-columns: 1fr; }
+  .retrato { order: -1; width: clamp(150px, 42vw, 220px); }
+  .portas { grid-template-columns: 1fr; }
+  .sociais { margin-left: 0; width: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .porta:hover { transform: none; }
+}

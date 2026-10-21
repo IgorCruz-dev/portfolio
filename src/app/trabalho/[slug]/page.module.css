@@ -1,0 +1,20 @@
+.vitrine { padding-bottom: clamp(2rem, 5vw, 4rem); }
+.quadro {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--rule-ink);
+  background: var(--ink-1);
+  box-shadow: 0 50px 90px -50px rgba(0, 0, 0, 0.95);
+}
+.imagem { width: 100%; height: auto; display: block; }
+.corpo { position: relative; }
+
+.fig { display: block; }
+.quadro { display: block; }
+.legenda {
+  margin-top: 0.85rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--on-ink-muted);
+}
